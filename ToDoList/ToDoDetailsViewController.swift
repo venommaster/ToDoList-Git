@@ -64,8 +64,38 @@ class ToDoDetailsViewController: UIViewController {
     
     @IBAction func taskDidComplete(_ sender: Any) {
         
+        let alert = UIAlertController(title: <#T##String?#>, message: "Are you sure you like to complete this task", preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancek", style: .cancel) { (action) in
+            
+            alert.dismiss(animated: true, completion: nil)
+            
+        }
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+            
+            self.completeTask(alert: alert)
+            
+            
+        }
+        
+        alert.addAction(cancelAction)
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true, completion: nil)
+        
+        
+       
+        
+    }
+    
+    
+    func completeTask(alert: UIAlertController) -> Void {
+        
+        
         toDoItem.isComplete = true
-
+        
         delegate?.update(task: toDoItem, index: toDoIndex)
         
         disableButton()
